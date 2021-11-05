@@ -1,0 +1,16 @@
+extends layout
+
+block content
+    h1= title
+    p Some changes here
+    button(class="btn btn-primary", type="button", onclick="update()") Press Me
+    div#target Display
+
+    a(href="/tetris_blocks") Tetris Blocks
+
+    script.
+        let client_count = 0
+        function update() {
+            client_count++;
+            document.querySelector("#target").innerHTML = `Value now ${client_count}`;
+        }

@@ -1,0 +1,27 @@
+extends layout
+
+block content
+    h1= title
+
+    - var rows = Number(query.rows); var cols = Number(query.cols);
+    p.
+        rows: #{query.rows}
+        <br>
+        cols: #{query.cols}
+
+    if isNaN(rows)
+        p rows is NOT a number
+    else if isNaN(cols)
+        p cols is NOT a number
+    else if rows > 16 || rows < 1
+        p rows is out of bounds
+    else if cols > 16 || cols < 1
+        p cols is out of bounds
+    else
+        table#outer
+            - for (let i = 0; i < rows; i++) {
+                tr#middle
+                    - for(let j = 0 ; j < cols ; j++){
+                        td=(i+j)%rows
+                    - }
+            - }
