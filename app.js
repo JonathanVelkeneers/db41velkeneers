@@ -24,15 +24,15 @@ async function recreateDB() {
     let instance1 = new Costume({costume_type: "ghost", size: 'large', cost: 25.4});
     let instance2 = new Costume({costume_type: "red astronaut", size: 'small', cost: 69});
     let instance3 = new Costume({costume_type: "spongebob", size: 'medium', cost: 100});
-    instance1.save(function (err, doc) {
+    instance1.save(function (err) {
         if (err) return console.error(err);
         console.log("First object saved")
     });
-    instance2.save(function (err, doc) {
+    instance2.save(function (err) {
         if (err) return console.error(err);
         console.log("Second object saved")
     });
-    instance3.save(function (err, doc) {
+    instance3.save(function (err) {
         if (err) return console.error(err);
         console.log("Third object saved")
     });
@@ -48,6 +48,7 @@ var usersRouter = require('./routes/users');
 let tetrisBlocksRouter = require('./routes/tetrisBlocks');
 let addModsRouter = require('./routes/addMods');
 let selectorRouter = require('./routes/selector');
+let resourceRouter = require('./routes/resource');
 
 var app = express();
 
@@ -66,6 +67,7 @@ app.use('/users', usersRouter);
 app.use('/tetris_blocks', tetrisBlocksRouter);
 app.use('/add_mods', addModsRouter);
 app.use('/selector', selectorRouter);
+app.use('/resource', resourceRouter);
 
 // catch 404 and forward to error handler
 app.use(function (req, res, next) {
@@ -73,7 +75,7 @@ app.use(function (req, res, next) {
 });
 
 // error handler
-app.use(function (err, req, res, next) {
+app.use(function (err, req, res) {
     // set locals, only providing error in development
     res.locals.message = err.message;
     res.locals.error = req.app.get('env') === 'development' ? err : {};
