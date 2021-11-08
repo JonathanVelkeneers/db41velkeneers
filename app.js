@@ -23,7 +23,7 @@ async function recreateDB() {
     await TetrisBlock.deleteMany();
     let instance1 = new TetrisBlock({color: "red", shape: 'square', numberOfSquares: 4});
     let instance2 = new TetrisBlock({color: "blue", shape: 'left corner', numberOfSquares: 3});
-    let instance3 = new TetrisBlock({color: "green", shape: 'right corner', numberOfSquares: 3});
+    let instance3 = new TetrisBlock({color: "yellow", shape: 'right corner', numberOfSquares: 3});
     instance1.save(function (err) {
         if (err) return console.error(err);
         console.log("First object saved")

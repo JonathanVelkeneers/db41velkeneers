@@ -1,9 +1,8 @@
 let express = require('express');
 let router = express.Router();
+const tetrisBlockController = require('../controllers/tetrisBlock');
 
 /* GET home page. */
-router.get('/', function(req, res, next) {
-  res.render('tetrisBlocks', { title: 'Search Results Tetris Blocks' });
-});
+router.get('/', tetrisBlockController.tetrisBlock_view_all_Page);
 
 module.exports = router;

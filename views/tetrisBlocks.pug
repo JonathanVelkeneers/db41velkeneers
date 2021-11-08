@@ -3,11 +3,10 @@ extends layout
 block content
     h1= title
 
-    - var array = [{color:"red", shape: "square", numberOfSquares: 4},{color:"blue", shape:"left corner", numberOfSquares: 3},{color:"green", shape: "right corner", numberOfSquares: 3}]
 
     div.container-fluid
         div.row
-            each item in array
+            each item in results
                 div.col-sm-2 <b>color:</b> #{item.color}
                     | <br> <b>shape:</b> #{item.shape}
                     | <br> <b>number of squares:</b> #{item.numberOfSquares}
