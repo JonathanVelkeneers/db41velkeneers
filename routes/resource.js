@@ -1,22 +1,22 @@
 var express = require('express');
 var router = express.Router();
 // Require controller modules.
-var api_controller = require('../controllers/api');
-var costume_controller = require('../controllers/costume');
+const apiController = require('../controllers/api');
+const tetrisBlockController = require('../controllers/tetrisBlock');
 
 /// API ROUTE ///
 // GET resources base.
-router.get('/', api_controller.api);
-/// COSTUME ROUTES ///
-// POST request for creating a Costume.
-router.post('/costumes', costume_controller.costume_create_post);
-// DELETE request to delete Costume.
-router.delete('/costumes/:id', costume_controller.costume_delete);
-// PUT request to update Costume.
-router.put('/costumes/:id', costume_controller.costume_update_put);
-// GET request for one Costume.
-router.get('/costumes/:id', costume_controller.costume_detail);
-// GET request for list of all Costume items.
-router.get('/costumes', costume_controller.costume_list);
+router.get('/', apiController.api);
+/// tetrisBlock ROUTES ///
+// POST request for creating a tetrisBlock.
+router.post('/tetris_blocks', tetrisBlockController.tetrisBlock_create_post);
+// DELETE request to delete tetrisBlock.
+router.delete('/tetris_blocks/:id', tetrisBlockController.tetrisBlock_delete);
+// PUT request to update tetrisBlock.
+router.put('/tetris_blocks/:id', tetrisBlockController.tetrisBlock_update_put);
+// GET request for one tetrisBlock.
+router.get('/tetris_blocks/:id', tetrisBlockController.tetrisBlock_detail);
+// GET request for list of all tetrisBlock items.
+router.get('/tetris_blocks', tetrisBlockController.tetrisBlock_list);
 
 module.exports = router;

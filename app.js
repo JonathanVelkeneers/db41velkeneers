@@ -15,15 +15,15 @@ db.on('error', console.error.bind(console, 'MongoDB connection error:'));
 db.once("open", function () {
     console.log("Connection to DB succeeded")
 });
-let Costume = require("./models/costume");
+const TetrisBlock = require("./models/tetrisBlock");
 
 // We can seed the collection if needed on server start
 async function recreateDB() {
     // Delete everything
-    await Costume.deleteMany();
-    let instance1 = new Costume({costume_type: "ghost", size: 'large', cost: 25.4});
-    let instance2 = new Costume({costume_type: "red astronaut", size: 'small', cost: 69});
-    let instance3 = new Costume({costume_type: "spongebob", size: 'medium', cost: 100});
+    await TetrisBlock.deleteMany();
+    let instance1 = new TetrisBlock({color: "red", shape: 'square', numberOfSquares: 4});
+    let instance2 = new TetrisBlock({color: "blue", shape: 'left corner', numberOfSquares: 3});
+    let instance3 = new TetrisBlock({color: "green", shape: 'right corner', numberOfSquares: 3});
     instance1.save(function (err) {
         if (err) return console.error(err);
         console.log("First object saved")

@@ -1,0 +1,12 @@
+extends layout
+
+block content
+    h1= title
+
+
+    div.container-fluid
+        div.row
+            each item in results
+                div.col-sm-2 <b>color:</b> #{item.color}
+                    | <br> <b>shape:</b> #{item.shape}
+                    | <br> <b>number of squares:</b> #{item.numberOfSquares}
