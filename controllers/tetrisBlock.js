@@ -11,8 +11,15 @@ exports.tetrisBlock_list = async function (req, res) {
     }
 };
 // for a specific tetrisBlock.
-exports.tetrisBlock_detail = function (req, res) {
-    res.send('NOT IMPLEMENTED: TetrisBlock detail: ' + req.params.id);
+exports.tetrisBlock_detail = async function (req, res) {
+    console.log("detail" + req.params.id)
+    try {
+        let result = await TetrisBlock.findById(req.params.id)
+        res.send(result)
+    } catch (error) {
+        res.status(500)
+        res.send(`{"error": document for id ${req.params.id} not found`);
+    }
 };
 // Handle tetrisBlock create on POST.
 exports.tetrisBlock_create_post = async function (req, res) {
