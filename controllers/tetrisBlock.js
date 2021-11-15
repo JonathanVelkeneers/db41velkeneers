@@ -117,3 +117,14 @@ exports.tetrisBlock_update_Page = async function (req, res) {
         res.send(`{'error': '${err}'}`);
     }
 };
+
+exports.tetrisBlock_delete_Page = async function (req, res) {
+    console.log("Delete view for id " + req.query.id)
+    try {
+        let result = await TetrisBlock.findById(req.query.id)
+        res.render('tetrisBlockDelete', {title: 'TetrisBlock Delete', toShow: result});
+    } catch (err) {
+        res.status(500)
+        res.send(`{'error': '${err}'}`);
+    }
+};

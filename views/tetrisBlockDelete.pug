@@ -1,0 +1,48 @@
+extends layout
+block content
+    h1= title
+    if (toShow == null)
+        h2 No instance to delete
+    else
+        - let tetrisBlockId = toShow._id
+        - let tetrisBlockColor = toShow.color
+        - let tetrisBlockShape = toShow.shape
+        - let tetrisBlockNumberOfSquares = toShow.numberOfSquares
+        script let tetrisBlockId = "#{tetrisBlockId}"
+
+        div
+            div.row
+                div(class='costumeAttr mr-3') TetrisBlock ID is:
+                p #{tetrisBlockId}
+            div.row
+                div(class='costumeAttr mr-3') TetrisBlock Color is:
+                p #{tetrisBlockColor}
+            div.row
+                div(class='costumeAttr mr-3') TetrisBlock Shape is:
+                p #{tetrisBlockShape}
+            div.row
+                div(class='costumeAttr mr-3') TetrisBlock Number Of Squares is:
+                p #{tetrisBlockNumberOfSquares}
+            button(class="btn btn-danger m-2" onclick="deleteOnId()") Delete
+            button(class="btn btn-secondary m-2" onclick="cancel()") Cancel
+
+        script.
+            function cancel() {
+                // Go back to the home page for the costume collection
+                window.location.href = '/tetris_blocks'
+            }
+        script.
+            function deleteOnId() {
+                console.log("starting delete") // delete first
+                fetch(`/resource/tetris_blocks/${tetrisBlockId}`, {
+                    method: 'DELETE' // Don't need a body for the delete
+                }).then((resp) => {
+                    return resp.json(); // or resp.text() or whatever the server sends
+                }).then((body) => {
+                    alert("Delete succeded")
+                    window.location.href = '/tetris_blocks'
+                }).catch((error) => {
+                    // TODO handle error
+                    alert("Delete failed " + error)
+                });
+            }
