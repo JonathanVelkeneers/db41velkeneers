@@ -38,8 +38,16 @@ exports.tetrisBlock_create_post = async function (req, res) {
     }
 };
 // Handle tetrisBlock delete form on DELETE.
-exports.tetrisBlock_delete = function (req, res) {
-    res.send('NOT IMPLEMENTED: TetrisBlock delete DELETE ' + req.params.id);
+exports.tetrisBlock_delete = async function (req, res) {
+    console.log("delete " + req.params.id)
+    try {
+        let result = await TetrisBlock.findByIdAndDelete(req.params.id)
+        console.log("Removed " + result)
+        res.send(result)
+    } catch (err) {
+        res.status(500)
+        res.send(`{"error": Error deleting ${err}}`);
+    }
 };
 // Handle tetrisBlock update form on PUT.
 exports.tetrisBlock_update_put = async function (req, res) {
