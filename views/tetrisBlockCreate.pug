@@ -1,0 +1,33 @@
+extends layout
+block content
+    h1= title
+
+    form(id='tetrisBlockForm', action="/resource/tetris_blocks", method="POST")
+        div.form-group
+            label.costumeAttr(for='color') TetrisBlock color:
+            input#color(type='text', name='color')
+        div.form-group
+            label.costumeAttr(for='shape') TetrisBlock shape:
+            input#shape(type='text', name='shape')
+        div.form-group
+            label.costumeAttr(for='numberOfSquares') Number of squares:
+            input#numberOfSquares(type='number', name='numberOfSquares')
+        input(type="submit")
+
+    script.
+        document.forms['tetrisBlockForm'].addEventListener('submit', (e) => {
+            e.preventDefault();
+            // TODO do something here to show user that form is being submitted
+            fetch(e.target.action, {
+                method: 'POST',
+                body: new URLSearchParams(new FormData(e.target))
+            }).then((resp) => {
+                return resp.json(); // or resp.text() or whatever the server sends
+            }).then((body) => {
+                alert("Save succeded")
+                // TODO handle body
+            }).catch((error) => {
+                // TODO handle error
+                alert("Save failed " + error)
+            });
+        });

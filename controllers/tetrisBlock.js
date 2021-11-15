@@ -81,16 +81,26 @@ exports.tetrisBlock_view_all_Page = async function (req, res) {
     }
 };
 
-exports.costume_view_one_Page = async function (req, res) {
+exports.tetrisBlock_view_one_Page = async function (req, res) {
     console.log("single view for id " + req.query.id)
     try {
         let result = await TetrisBlock.findById(req.query.id)
         if (result) {
             res.render('tetrisBlockDetail', {title: 'Tetris Block Detail', toShow: result});
-        }else{
+        } else {
             res.status(404)
             res.send(`{'error': 'Item not found'}`);
         }
+    } catch (err) {
+        res.status(500)
+        res.send(`{'error': '${err}'}`);
+    }
+};
+
+exports.tetrisBlock_create_Page = function (req, res) {
+    console.log("create view")
+    try {
+        res.render('tetrisBlockCreate', {title: 'TetrisBlock Create'});
     } catch (err) {
         res.status(500)
         res.send(`{'error': '${err}'}`);
