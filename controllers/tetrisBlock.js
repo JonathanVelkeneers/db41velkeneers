@@ -61,7 +61,7 @@ exports.tetrisBlock_update_put = async function (req, res) {
         if (req.body.numberOfSquares)
             toUpdate.numberOfSquares = req.body.numberOfSquares;
         let result = await toUpdate.save();
-        console.log("Sucess " + result)
+        console.log("Success " + result)
         res.send(result)
     } catch (err) {
         res.status(500)
@@ -78,5 +78,21 @@ exports.tetrisBlock_view_all_Page = async function (req, res) {
     } catch (err) {
         res.status(500);
         res.send(`{"error": ${err}}`);
+    }
+};
+
+exports.costume_view_one_Page = async function (req, res) {
+    console.log("single view for id " + req.query.id)
+    try {
+        let result = await TetrisBlock.findById(req.query.id)
+        if (result) {
+            res.render('tetrisBlockDetail', {title: 'Tetris Block Detail', toShow: result});
+        }else{
+            res.status(404)
+            res.send(`{'error': 'Item not found'}`);
+        }
+    } catch (err) {
+        res.status(500)
+        res.send(`{'error': '${err}'}`);
     }
 };
