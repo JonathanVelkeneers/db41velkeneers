@@ -5,8 +5,15 @@ block content
 
 
     div.container-fluid
-        div.row
+        div(class="row m-1")
             each item in results
+                - let destination = `dispatch(\"/tetris_blocks/update?id=${item._id}\")`
                 div.col-sm-2 <b>color:</b> #{item.color}
                     | <br> <b>shape:</b> #{item.shape}
                     | <br> <b>number of squares:</b> #{item.numberOfSquares}
+                    button.btn( class="btn-primary ml-1", onclick= destination) Update
+
+    script.
+        function dispatch(path) {
+            window.location.href = path
+        }
