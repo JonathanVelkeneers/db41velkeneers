@@ -2,18 +2,16 @@ extends layout
 
 block content
     h1= title
+    a(class="btn btn-primary", href="/tetris_blocks/create") Create new
 
 
     div.container-fluid
         div(class="row m-1")
             each item in results
-                - let destination = `dispatch(\"/tetris_blocks/update?id=${item._id}\")`
                 div.col-sm-2 <b>color:</b> #{item.color}
                     | <br> <b>shape:</b> #{item.shape}
                     | <br> <b>number of squares:</b> #{item.numberOfSquares}
-                    button.btn( class="btn-primary ml-1", onclick= destination) Update
-
-    script.
-        function dispatch(path) {
-            window.location.href = path
-        }
+                    div(class="btn-group-vertical")
+                        a(class="btn btn-primary", href=`/tetris_blocks/detail?id=${item._id}`) Details
+                        a(class="btn btn-warning", href=`/tetris_blocks/update?id=${item._id}`) Update
+                        a(class="btn btn-danger", href=`/tetris_blocks/delete?id=${item._id}`) Delete
