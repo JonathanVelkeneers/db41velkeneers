@@ -1,7 +1,10 @@
 const mongoose = require("mongoose")
 const tetrisBlockSchema = mongoose.Schema({
     color: String,
-    shape: String,
+    shape: {
+        type: String,
+        required: true
+    },
     numberOfSquares: {
         type: Number,
         min: 0,
