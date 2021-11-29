@@ -80,13 +80,6 @@ app.use(express.urlencoded({extended: false}));
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
 
-app.use('/', indexRouter);
-app.use('/users', usersRouter);
-app.use('/tetris_blocks', tetrisBlocksRouter);
-app.use('/add_mods', addModsRouter);
-app.use('/selector', selectorRouter);
-app.use('/resource', resourceRouter);
-
 app.use(require('express-session')({
     secret: 'keyboard cat',
     resave: false,
@@ -98,10 +91,17 @@ app.use(passport.session());
 // passport config
 // Use the existing connection
 // The Account model
-var Account = require('./models/account');
+let Account = require('./models/account');
 passport.use(new LocalStrategy(Account.authenticate()));
 passport.serializeUser(Account.serializeUser());
 passport.deserializeUser(Account.deserializeUser());
+
+app.use('/', indexRouter);
+app.use('/users', usersRouter);
+app.use('/tetris_blocks', tetrisBlocksRouter);
+app.use('/add_mods', addModsRouter);
+app.use('/selector', selectorRouter);
+app.use('/resource', resourceRouter);
 
 
 // catch 404 and forward to error handler
