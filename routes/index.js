@@ -56,7 +56,10 @@ router.post('/login', passport.authenticate('local', {failureRedirect: '/login'}
     let prevSession = req.session;
     req.session.regenerate((err) => {
         Object.assign(req.session, prevSession);
-        res.redirect('/');
+        if (req.session.returnTo)
+            res.redirect(req.session.returnTo);
+        else
+            res.redirect('/');
     });
 });
 
